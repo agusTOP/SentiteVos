@@ -57,6 +57,9 @@ nav {
   font-weight: bold;
   color: #e5738a;
 }
+.carousel-caption {
+  color: #3a7ca5;
+}
 nav ul {
   list-style: none;
   display: flex;
@@ -537,7 +540,7 @@ nav a:focus, .btn-reserva:focus, .btn-instagram:focus, .reserva button:focus, in
   }
   .carousel-inner,
   .carousel-inner img {
-    max-height: 220px;
+   /* max-height: 220px; */
   }
 }
 @media (max-width: 500px) {
@@ -549,18 +552,39 @@ nav a:focus, .btn-reserva:focus, .btn-instagram:focus, .reserva button:focus, in
     gap: 0.7rem;
   }
 }
+/* Limita el ancho del carrusel en desktop y lo centra */
+.banner .carousel {
+  max-width: 50vw;   /* O el valor que prefieras, ej: 50vw, 700px, etc. */
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel-inner {
+  max-height: 800px;
+}
+.carousel-inner img {
+  max-height: 800px;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .banner .carousel {
+    max-width: 100%;
+  }
+  .carousel-inner {
+    max-height: 380px;
+  }
+  .carousel-inner img {
+    max-height: 380px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.98); }
   to { opacity: 1; transform: scale(1); }
 }
-.carousel-inner {
-  max-height: 380px;
-}
-.carousel-inner img {
-  max-height: 380px;
-  width: 100%;
-  object-fit: cover;
-}
+
 .btn-login {
   background: #fff;
   color: #e5738a;
