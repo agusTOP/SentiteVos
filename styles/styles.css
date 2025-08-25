@@ -1,0 +1,589 @@
+/* PALETA DEL LOGO:
+   Rosa principal: #e5738a
+   Rosa oscuro:   #b94a5a
+   Celeste fondo: #b3e0f7
+   Azul líneas:   #3a7ca5
+   Gris oscuro:   #222
+*/
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: #b3e0f7; /* celeste fondo logo */
+  color: #222; /* gris oscuro para mejor contraste */
+  font-size: 18px;
+  line-height: 1.6;
+  padding-top: 70px; /* Compensa navbar fixed-top */
+}
+main {
+  flex: 1 0 auto;
+}
+footer, .footer-minimal {
+  flex-shrink: 0;
+}
+@media (max-width: 991px) {
+  body {
+    padding-top: 60px;
+  }
+}
+header {
+  background: linear-gradient(120deg, #e5738a 0%, #b3e0f7 100%); /* rosa a celeste */
+  padding-bottom: 2rem;
+}
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #b3e0f7;
+  box-shadow: 0 2px 8px rgba(58,124,165,0.10); /* azul líneas */
+  transition: box-shadow 0.3s;
+}
+.nav-link.active {
+  color: #fff;
+  background: #e5738a; /* rosa principal */
+  border-radius: 20px;
+  padding: 0.3em 1em;
+  box-shadow: 0 2px 8px rgba(233,115,138,0.15);
+  transition: background 0.2s, color 0.2s;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e5738a;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+nav a {
+  text-decoration: none;
+  color: #3a7ca5; /* azul líneas */
+  font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #b94a5a; /* rosa oscuro */
+}
+.banner {
+  text-align: center;
+  padding: 3rem 1rem 2rem 1rem;
+}
+.banner h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  color: #e5738a;
+}
+.banner p {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+.btn-reserva {
+  background: #e5738a;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-reserva:hover {
+  background: #b94a5a;
+}
+.intro {
+  max-width: 700px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.servicios {
+  background: #b3e0f7;
+  padding: 2rem 1rem;
+}
+.servicios-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.servicio-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(58,124,165,0.10);
+  width: 270px;
+  padding: 1.2rem 1rem 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.servicio-card:hover {
+  box-shadow: 0 8px 32px rgba(233,115,138,0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+.servicio-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 1px 6px rgba(58,124,165,0.10);
+}
+.servicio-card h3 {
+  color: #e5738a;
+  margin: 0.5rem 0 0.3rem 0;
+}
+.servicio-card p {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+.ver-mas, .cerrar-detalle {
+  background: #e5738a;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.ver-mas:hover, .cerrar-detalle:hover {
+  background: #b94a5a;
+  transform: scale(1.05);
+}
+.servicio-detalle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background: #b3e0f7;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(58,124,165,0.10);
+  margin-top: 1rem;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  width: 100%;
+  animation: fadeIn 0.4s;
+}
+.servicio-card.expanded .servicio-detalle {
+  display: flex;
+}
+.galeria-servicio {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.7rem 0;
+}
+.galeria-servicio img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(58,124,165,0.10);
+}
+.reserva {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+.reserva button {
+  background: #e5738a;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.reserva button:hover {
+  background: #b94a5a;
+}
+.testimonios {
+  background: #eaf6fb;
+  padding: 2rem 1rem;
+}
+.testimonios-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.testimonio {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  max-width: 300px;
+  font-style: italic;
+  box-shadow: 0 2px 8px rgba(58,124,165,0.06);
+}
+.testimonio span {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  color: #e5738a;
+  font-weight: bold;
+}
+.instagram {
+  background: #b3e0f7;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.instagram-galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.instagram-galeria img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(58,124,165,0.08);
+}
+.btn-instagram {
+  display: inline-block;
+  margin-top: 1rem;
+  background: #e5738a;
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-instagram:hover {
+  background: #b94a5a;
+}
+footer {
+  background: #3a7ca5;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 1rem 1rem 1rem;
+  margin-top: 2rem;
+}
+footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+.btn-reserva, .btn-instagram, .reserva button {
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn-reserva:hover, .btn-instagram:hover, .reserva button:hover {
+  background: #b94a5a;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(233,115,138,0.15);
+}
+.servicio, .testimonio, .instagram-galeria img {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.servicio:hover, .testimonio:hover, .instagram-galeria img:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(233,115,138,0.15);
+}
+input, textarea {
+  border-color: #b3e0f7;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, textarea:focus {
+  border-color: #e5738a;
+  box-shadow: 0 0 0 2px #b3e0f7;
+  outline: none;
+}
+.form-contacto input, .form-contacto textarea {
+  width: 100%;
+  padding: 0.7em 1em;
+  border: 1.5px solid #f6e7fa;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  resize: none;
+}
+.form-contacto button {
+  background: #e5738a;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.form-contacto button:hover {
+  background: #b94a5a;
+}
+.sobre-nosotros {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(201,79,124,0.08);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+.sobre-nosotros img {
+  border-radius: 16px;
+  width: 220px;
+  box-shadow: 0 2px 8px rgba(201,79,124,0.10);
+}
+.sobre-nosotros h2 {
+  color: #c94f7c;
+  margin-top: 0;
+}
+.sobre-nosotros ul {
+  padding-left: 1.2em;
+}
+.testimonios-carrusel {
+  position: relative;
+  max-width: 350px;
+  margin: 0 auto 2rem auto;
+}
+.testimonios-carrusel input[type="radio"] {
+  display: none;
+}
+.testimonios-carrusel .testimonios-lista {
+  display: flex;
+  transition: transform 0.5s;
+  width: 100%;
+}
+.testimonios-carrusel .testimonio {
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity 0.5s;
+  z-index: 1;
+}
+#t1:checked ~ .testimonios-lista .t1,
+#t2:checked ~ .testimonios-lista .t2,
+#t3:checked ~ .testimonios-lista .t3,
+#t4:checked ~ .testimonios-lista .t4,
+#t5:checked ~ .testimonios-lista .t5 {
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+}
+.carrusel-controles {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.carrusel-controles label {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f6e7fa;
+  border: 2px solid #c94f7c;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  display: inline-block;
+}
+#t1:checked ~ .carrusel-controles label[for="t1"],
+#t2:checked ~ .carrusel-controles label[for="t2"],
+#t3:checked ~ .carrusel-controles label[for="t3"],
+#t4:checked ~ .carrusel-controles label[for="t4"],
+#t5:checked ~ .carrusel-controles label[for="t5"] {
+  background: #c94f7c;
+  border: 2px solid #a13e63;
+}
+nav a, button, input, textarea {
+  outline: none;
+}
+nav a:focus, .btn-reserva:focus, .btn-instagram:focus, .reserva button:focus, input:focus, textarea:focus, .form-contacto button:focus {
+  outline: 2px solid #c94f7c;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #f8b6d2;
+}
+.faq {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(201,79,124,0.08);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.faq-item {
+  margin-bottom: 1.2rem;
+}
+.faq-item h3 {
+  margin: 0 0 0.3em 0;
+  color: #3a7ca5;
+  font-size: 1.1em;
+}
+.faq-item p {
+  margin: 0 0 0.5em 0;
+  color: #555;
+}
+.faq h2 {
+  color: #e5738a;
+}
+.navbar {
+  z-index: 1050;
+  box-shadow: 0 2px 8px rgba(58,124,165,0.10);
+  border-bottom: solid 2px #e68899;
+}
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+.footer-minimal {
+  background: #fff;
+  border-top: 1.5px solid #eaeaea;
+}
+.footer-logo {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  color: #e5738a;
+}
+.footer-links a {
+  color: #3a7ca5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: #b94a5a;
+  text-decoration: underline;
+}
+.footer-redes img {
+  vertical-align: middle;
+  transition: transform 0.2s;
+}
+.footer-redes a:hover img {
+  transform: scale(1.15);
+}
+.footer-redes a[title="WhatsApp"] svg {
+  filter: drop-shadow(0 2px 8px rgba(37,211,102,0.12));
+}
+.footer-redes a[title="Instagram"] svg {
+  filter: drop-shadow(0 2px 8px rgba(229,115,138,0.12));
+}
+@media (max-width: 900px) {
+  .servicios-lista {
+    flex-direction: column;
+    align-items: center;
+  }
+  .servicio-card {
+    width: 95vw;
+    max-width: 350px;
+  }
+  .servicios-lista, .testimonios-lista, .instagram-galeria {
+    flex-direction: column;
+    align-items: center;
+  }
+  .servicio, .testimonio {
+    width: 90%;
+    max-width: 350px;
+  }
+  nav ul {
+    gap: 0.7rem;
+  }
+}
+@media (max-width: 700px) {
+  .banner h1 {
+    font-size: 2rem;
+  }
+  .intro, .sobre-nosotros, .servicios, .testimonios, .instagram, .reserva, .form-contacto, .mapa-contacto {
+    padding: 1rem 0.5rem;
+    margin: 1rem 0;
+  }
+  nav {
+    flex-direction: column;
+    padding: 0.5rem 0.5rem;
+  }
+  .logo {
+    font-size: 1.3rem;
+  }
+  .footer-minimal .container {
+    flex-direction: column !important;
+    gap: 1.2rem !important;
+    text-align: center;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 0.7rem !important;
+    justify-content: center;
+  }
+  .carousel-inner,
+  .carousel-inner img {
+    max-height: 220px;
+  }
+}
+@media (max-width: 500px) {
+  .testimonios-carrusel {
+    max-width: 98vw;
+  }
+  .footer-redes {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+.carousel-inner {
+  max-height: 380px;
+}
+.carousel-inner img {
+  max-height: 380px;
+  width: 100%;
+  object-fit: cover;
+}
+.btn-login {
+  background: #fff;
+  color: #e5738a;
+  border: 2px solid #e5738a;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.btn-login:hover {
+  background: #e5738a;
+  color: #fff;
+  border-color: #e5738a;
+}
+.btn-register {
+  background: #3a7ca5;
+  color: #fff;
+  border: 2px solid #3a7ca5;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.btn-register:hover {
+  background: #e5738a;
+  color: #fff;
+  border-color: #e5738a;
+}
