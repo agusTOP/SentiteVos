@@ -23,7 +23,7 @@ if ($email === '' || $password === '') {
 
 try {
     $conn = conectarDB();
-    $stmt = $conn->prepare('SELECT id, nombre, email, password FROM usuarios WHERE email = ?');
+    $stmt = $conn->prepare('SELECT id, nombre, email, password, email_verified FROM usuarios WHERE email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -37,6 +37,14 @@ try {
 
     if (!password_verify($password, $usuario['password'])) {
         flash('error', 'Email o contraseña incorrectos');
+        $stmt->close();
+        $conn->close();
+        redirect('../login.php');
+    }
+
+    // Exigir verificación de email
+    if ((int) $usuario['email_verified'] !== 1) {
+        flash('error', 'Debes verificar tu correo antes de iniciar sesión. Revisa tu email.');
         $stmt->close();
         $conn->close();
         redirect('../login.php');
