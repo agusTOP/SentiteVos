@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     telefono VARCHAR(20),
+    -- Verificación de email
+    email_verified TINYINT(1) NOT NULL DEFAULT 0,
+    email_verify_token VARCHAR(64) DEFAULT NULL,
+    email_verified_at DATETIME DEFAULT NULL,
+    last_verification_sent_at DATETIME DEFAULT NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

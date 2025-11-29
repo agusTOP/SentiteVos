@@ -38,6 +38,15 @@ ensureCsrfToken(); ?>
             </div>
             <button type="submit" class="btn btn-register w-100">Ingresar</button>
           </form>
+          <hr class="my-4">
+          <div>
+            <p class="mb-2" style="color:#555;">¿No te llegó el correo de verificación?</p>
+            <form method="POST" action="php/resend_verification.php" class="d-flex gap-2">
+              <?php echo csrf_field(); ?>
+              <input type="email" class="form-control" name="email" placeholder="Tu email" required>
+              <button type="submit" class="btn btn-login">Reenviar</button>
+            </form>
+          </div>
           <div class="text-center mt-3">
             <a href="register.php" style="color:#3a7ca5;">¿No tienes cuenta? Registrate</a>
           </div>
