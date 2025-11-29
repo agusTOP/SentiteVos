@@ -1,0 +1,46 @@
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.code-workspace
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Node / tooling (if used) ---
+node_modules/
+dist/
+build/
+.cache/
+coverage/
+
+# --- PHP / Composer (if added later) ---
+vendor/
+composer.phar
+.phpunit.result.cache
+
+# --- Logs / Temp ---
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+storage/
+
+# --- Environment / Secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Uploads / Artifacts ---
+uploads/
+*.bak
+*.backup
+*.old
+*.swp
+*.swo
+
+# --- Image/process caches (optional) ---
+assets/images/.cache/
+assets/images/thumbs/

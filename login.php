@@ -1,6 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once __DIR__ . '/config/helpers.php';
+ensureCsrfToken(); ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +12,7 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="icon" href="assets/icon.ico">
 </head>
+
 <body>
   <div id="nav-include"></div>
   <main class="container py-5">
@@ -16,10 +20,14 @@
       <div class="col-12 col-md-6 col-lg-4">
         <div class="bg-white rounded shadow-sm p-4">
           <h2 class="mb-4 text-center" style="color:#e5738a;">Iniciar sesión</h2>
-          <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+          <?php if ($msg = flash_get('error')): ?>
+            <div class="alert alert-danger"><?php echo e($msg); ?></div>
+          <?php endif; ?>
+          <?php if ($msg = flash_get('success')): ?>
+            <div class="alert alert-success"><?php echo e($msg); ?></div>
           <?php endif; ?>
           <form method="POST" action="php/login.php">
+            <?php echo csrf_field(); ?>
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
               <input type="email" class="form-control" id="loginEmail" name="email" required>
@@ -31,7 +39,7 @@
             <button type="submit" class="btn btn-register w-100">Ingresar</button>
           </form>
           <div class="text-center mt-3">
-            <a href="register.html" style="color:#3a7ca5;">¿No tienes cuenta? Registrate</a>
+            <a href="register.php" style="color:#3a7ca5;">¿No tienes cuenta? Registrate</a>
           </div>
         </div>
       </div>
@@ -41,4 +49,5 @@
   <script src="scripts/include.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

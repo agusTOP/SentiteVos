@@ -1,6 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once __DIR__ . '/config/helpers.php';
+ensureCsrfToken(); ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +12,7 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="icon" href="assets/icon.ico">
 </head>
+
 <body>
   <div id="nav-include"></div>
   <main class="container py-5">
@@ -16,13 +20,14 @@
       <div class="col-12 col-md-6 col-lg-4">
         <div class="bg-white rounded shadow-sm p-4">
           <h2 class="mb-4 text-center" style="color:#3a7ca5;">Registrarse</h2>
-          <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+          <?php if ($msg = flash_get('error')): ?>
+            <div class="alert alert-danger"><?php echo e($msg); ?></div>
           <?php endif; ?>
-          <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+          <?php if ($msg = flash_get('success')): ?>
+            <div class="alert alert-success"><?php echo e($msg); ?></div>
           <?php endif; ?>
           <form method="POST" action="php/register.php">
+            <?php echo csrf_field(); ?>
             <div class="mb-3">
               <label for="registerName" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="registerName" name="nombre" required>
@@ -38,7 +43,7 @@
             <button type="submit" class="btn btn-login w-100">Crear cuenta</button>
           </form>
           <div class="text-center mt-3">
-            <a href="login.html" style="color:#e5738a;">¿Ya tienes cuenta? Inicia sesión</a>
+            <a href="login.php" style="color:#e5738a;">¿Ya tienes cuenta? Inicia sesión</a>
           </div>
         </div>
       </div>
@@ -48,4 +53,5 @@
   <script src="scripts/include.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
