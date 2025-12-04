@@ -23,7 +23,7 @@ if ($email === '' || $password === '') {
 
 try {
     $conn = conectarDB();
-    $stmt = $conn->prepare('SELECT id, nombre, email, password, email_verified FROM usuarios WHERE email = ?');
+    $stmt = $conn->prepare('SELECT id, nombre, email, password, email_verified, rol FROM usuarios WHERE email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -63,9 +63,13 @@ try {
     $_SESSION['usuario_id'] = $usuario['id'];
     $_SESSION['usuario_nombre'] = $usuario['nombre'];
     $_SESSION['usuario_email'] = $usuario['email'];
+    $_SESSION['usuario_rol'] = $usuario['rol'] ?? 'cliente';
 
     $stmt->close();
     $conn->close();
+    if ($_SESSION['usuario_rol'] === 'admin') {
+        redirect('../admin/dashboard.php');
+    }
     redirect('../index.html');
 } catch (Throwable $e) {
     log_error('Login error: ' . $e->getMessage());

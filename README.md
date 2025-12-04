@@ -6,7 +6,7 @@
 ProyectoFinal/
 ├── index.html
 ├── contacto.html
-├── galeria.html
+├── galeria.php
 ├── servicios.html
 ├── testimonios.html
 ├── styles/
