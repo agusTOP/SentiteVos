@@ -18,7 +18,9 @@ function enhanceAuthButtons() {
       if (!container) return;
       if (data.logged_in) {
         const nombreCorto = data.nombre ? data.nombre.split(' ')[0] : 'Usuario';
+        const adminLink = data.rol === 'admin' ? '<a href="admin/dashboard.php" class="btn btn-admin">Panel Admin</a>' : '';
         container.innerHTML = `
+          ${adminLink}
           <a href="perfil.php" class="btn btn-login">${nombreCorto}</a>
           <a href="php/logout.php" class="btn btn-register">Salir</a>
         `;

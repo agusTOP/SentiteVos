@@ -6,6 +6,7 @@ if (!empty($_SESSION['usuario_id'])) {
     $response['logged_in'] = true;
     $response['nombre'] = $_SESSION['usuario_nombre'] ?? null;
     $response['email'] = $_SESSION['usuario_email'] ?? null;
+    $response['rol'] = $_SESSION['usuario_rol'] ?? 'cliente';
 }
 // Allow simple caching prevention
 header('Cache-Control: no-store');

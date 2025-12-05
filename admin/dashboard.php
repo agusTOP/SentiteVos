@@ -78,17 +78,24 @@ $error = flash_get('error');
                     row.innerHTML = '<div class="alert alert-info">No hay imágenes aún.</div>';
                     return;
                 }
-                row.innerHTML = items.slice(0, 6).map(it => `
+                const render = items.slice(0, 12).map(it => `
           <div class="col-12 col-sm-6 col-lg-4 mb-3">
             <div class="card h-100 shadow-sm">
               <img src="../${it.ruta_imagen}" class="card-img-top" alt="${it.titulo}">
               <div class="card-body">
                 <h5 class="card-title">${it.titulo}</h5>
                 <p class="text-muted small mb-0">${it.fecha_subida}</p>
+                                    <form method="post" action="../php/eliminar_imagen.php" onsubmit="return confirm('¿Eliminar esta imagen?');">
+                                        <input type="hidden" name="id" value="${it.id}">
+                                        <input type="hidden" name="ruta" value="${it.ruta_imagen}">
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                    </form>
               </div>
             </div>
           </div>
-        `).join('');
+                    `).join('');
+                row.innerHTML = render;
             }).catch(() => { });
     </script>
 </body>

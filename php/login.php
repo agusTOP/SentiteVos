@@ -67,9 +67,7 @@ try {
 
     $stmt->close();
     $conn->close();
-    if ($_SESSION['usuario_rol'] === 'admin') {
-        redirect('../admin/dashboard.php');
-    }
+    // Siempre llevar al inicio; el panel admin queda accesible desde el menú
     redirect('../index.html');
 } catch (Throwable $e) {
     log_error('Login error: ' . $e->getMessage());
