@@ -80,7 +80,7 @@ try {
 
             // Construir URL de verificación
             $appUrl = env('APP_URL', null);
-            $verifyPath = '/sentitevos/php/verify_email.php?token=' . urlencode($verifyToken) . '&email=' . urlencode($email);
+            $verifyPath = '/php/verify_email.php?token=' . urlencode($verifyToken) . '&email=' . urlencode($email);
             $verifyUrl = $appUrl ? rtrim($appUrl, '/') . $verifyPath : ('http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $verifyPath);
 
             $mail->isHTML(true);

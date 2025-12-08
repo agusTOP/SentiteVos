@@ -1,21 +1,8 @@
 <?php
 session_start();
-require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/config/helpers.php';
-
-$items = [];
-try {
-    $conn = conectarDB();
-    $stmt = $conn->prepare('SELECT id, titulo, descripcion, ruta_imagen, fecha_subida FROM galeria ORDER BY fecha_subida DESC');
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $items = $res->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-    $conn->close();
-} catch (Throwable $e) {
-    log_error('List galeria error: ' . $e->getMessage());
-    $items = [];
-}
+// Separación de lógica: obtener datos desde php/obtener_galeria.php
+$items = require __DIR__ . '/php/obtener_galeria.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
