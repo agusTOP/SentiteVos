@@ -31,7 +31,7 @@ function enhanceAuthButtons() {
 
 document.addEventListener('DOMContentLoaded', function () {
   if (document.getElementById('nav-include')) {
-    includeHTML('nav-include', 'nav.html', enhanceAuthButtons);
+    includeHTML('nav-include', 'includes/nav.html', enhanceAuthButtons);
   }
-  if (document.getElementById('footer-include')) includeHTML('footer-include', 'footer.html');
+  if (document.getElementById('footer-include')) includeHTML('footer-include', 'includes/footer.html');
 });
