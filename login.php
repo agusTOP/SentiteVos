@@ -50,6 +50,8 @@ ensureCsrfToken(); ?>
           </div>
           <div class="text-center mt-3">
             <a href="register.php" style="color:#3a7ca5;">¿No tienes cuenta? Registrate</a>
+            <br>
+            <a href="forgot_password.php" style="color:#e5738a;">¿Olvidaste tu contraseña?</a>
           </div>
         </div>
       </div>

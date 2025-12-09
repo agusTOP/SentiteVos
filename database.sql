@@ -15,6 +15,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
     email_verify_token VARCHAR(64) DEFAULT NULL,
     email_verified_at DATETIME DEFAULT NULL,
     last_verification_sent_at DATETIME DEFAULT NULL,
+    -- Recuperación de contraseña
+    password_reset_token VARCHAR(64) DEFAULT NULL,
+    password_reset_expires DATETIME DEFAULT NULL,
+    -- Rol del usuario
+    rol ENUM('admin','cliente') DEFAULT 'cliente',
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
