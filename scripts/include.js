@@ -30,8 +30,11 @@ function enhanceAuthButtons() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  // En páginas HTML puras, incluir parciales vía JS
   if (document.getElementById('nav-include')) {
-    includeHTML('nav-include', 'includes/nav.html', enhanceAuthButtons);
+    includeHTML('nav-include', 'includes/nav.php', enhanceAuthButtons);
   }
-  if (document.getElementById('footer-include')) includeHTML('footer-include', 'includes/footer.html');
+  if (document.getElementById('footer-include')) {
+    includeHTML('footer-include', 'includes/footer.html');
+  }
 });

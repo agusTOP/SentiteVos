@@ -28,7 +28,7 @@ $items = require __DIR__ . '/php/obtener_galeria.php';
 </head>
 
 <body>
-    <div id="nav-include"></div>
+    <?php include __DIR__ . '/includes/nav.php'; ?>
     <main>
         <section class="instagram" id="galeria">
             <h2>
@@ -82,7 +82,7 @@ $items = require __DIR__ . '/php/obtener_galeria.php';
             </div>
         </section>
     </main>
-    <div id="footer-include"></div>
+    <?php include __DIR__ . '/includes/footer.html'; ?>
     <script src="scripts/include.js"></script>
     <script>
         const galeriaImgs = <?php echo json_encode($rutas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>;

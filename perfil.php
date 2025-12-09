@@ -24,7 +24,7 @@ $email = $_SESSION['usuario_email'] ?? '';
 </head>
 
 <body>
-    <div id="nav-include"></div>
+    <?php include __DIR__ . '/includes/nav.php'; ?>
     <main class="container py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
@@ -50,7 +50,7 @@ $email = $_SESSION['usuario_email'] ?? '';
             </div>
         </div>
     </main>
-    <div id="footer-include"></div>
+    <?php include __DIR__ . '/includes/footer.html'; ?>
     <script src="scripts/include.js"></script>
 
 </body>

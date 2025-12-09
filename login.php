@@ -15,7 +15,7 @@ ensureCsrfToken(); ?>
 </head>
 
 <body>
-  <div id="nav-include"></div>
+  <?php include __DIR__ . '/includes/nav.php'; ?>
   <main class="container py-5">
     <div class="row justify-content-center">
       <div class="col-12 col-md-6 col-lg-4">
@@ -55,7 +55,7 @@ ensureCsrfToken(); ?>
       </div>
     </div>
   </main>
-  <div id="footer-include"></div>
+  <?php include __DIR__ . '/includes/footer.html'; ?>
   <script src="scripts/include.js"></script>
 
 </body>
