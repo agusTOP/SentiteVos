@@ -17,9 +17,11 @@ $error = flash_get('error');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin</title>
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
+    <link href="../styles/styles.css" rel="stylesheet">
+    <link rel="icon" href="../assets/icon.ico">
 </head>
 
-<body class="bg-light">
+<body class="bg-light" style="padding-top: 0;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <span class="navbar-brand">Panel de Administración</span>
@@ -42,11 +44,15 @@ $error = flash_get('error');
                 <button class="nav-link" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button"
                     role="tab">Usuarios</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reservas-tab" data-bs-toggle="tab" data-bs-target="#reservas" type="button"
+                    role="tab">Reservas</button>
+            </li>
         </ul>
 
         <div class="tab-content pt-3" id="adminTabsContent">
             <div class="tab-pane fade show active" id="galeria" role="tabpanel">
-                <h2 class="mb-3">Subir imagen a la galería</h2>
+                <h2 class="mb-3 admin-section-title">Subir imagen a la galería</h2>
 
                 <?php if ($success): ?>
                     <div class="alert alert-success"><?php echo e($success); ?></div>
@@ -79,12 +85,12 @@ $error = flash_get('error');
                     </div>
                 </div>
 
-                <h3 class="mt-4 mb-3">Últimas imágenes</h3>
+                <h3 class="mt-4 mb-3 admin-section-subtitle">Últimas imágenes</h3>
                 <div class="row" id="ultimas-imagenes"></div>
             </div>
 
             <div class="tab-pane fade" id="usuarios" role="tabpanel">
-                <h2 class="mb-3">Gestión de Usuarios</h2>
+                <h2 class="mb-3 admin-section-title">Gestión de Usuarios</h2>
                 <?php $usuarios = require __DIR__ . '/../php/admin_list_users.php'; ?>
                 <?php if (empty($usuarios)): ?>
                     <div class="alert alert-info">No hay usuarios para mostrar.</div>
@@ -134,11 +140,91 @@ $error = flash_get('error');
                     </div>
                 <?php endif; ?>
             </div>
+            <div class="tab-pane fade" id="reservas" role="tabpanel">
+                <h2 class="mb-3 admin-section-title">Gestión de Reservas</h2>
+                <?php
+                try {
+                    require_once __DIR__ . '/../config/database.php';
+                    $conn = conectarDB();
+                    $res = $conn->query("SELECT r.id, r.servicio, r.fecha, r.hora, r.estado, u.nombre, u.email FROM reservas r JOIN usuarios u ON u.id=r.usuario_id ORDER BY r.fecha DESC, r.hora DESC");
+                    $reservas = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+                    $conn->close();
+                } catch (Throwable $e) {
+                    log_error('Admin listar reservas error: ' . $e->getMessage());
+                    $reservas = [];
+                }
+                ?>
+                <?php if (empty($reservas)): ?>
+                    <div class="alert alert-info">No hay reservas aún.</div>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Servicio</th>
+                                    <th>Cliente</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($reservas as $r): ?>
+                                    <tr>
+                                        <td><?php echo e($r['fecha']); ?></td>
+                                        <td><?php echo substr($r['hora'], 0, 5); ?></td>
+                                        <td><?php echo e($r['servicio']); ?></td>
+                                        <td><?php echo e($r['nombre']); ?></td>
+                                        <td><?php echo e($r['email']); ?></td>
+                                        <td><span
+                                                class="badge bg-<?php echo $r['estado'] === 'confirmada' ? 'success' : ($r['estado'] === 'pendiente' ? 'warning text-dark' : 'secondary'); ?>"><?php echo e($r['estado']); ?></span>
+                                        </td>
+                                        <td class="d-flex gap-2">
+                                            <form method="post" action="../php/admin_reserva_estado.php">
+                                                <?php echo csrf_field(); ?>
+                                                <input type="hidden" name="id" value="<?php echo (int) $r['id']; ?>">
+                                                <input type="hidden" name="estado" value="confirmada">
+                                                <button class="btn btn-sm btn-outline-success" type="submit" <?php echo $r['estado'] === 'confirmada' ? 'disabled' : ''; ?>>Confirmar</button>
+                                            </form>
+                                            <form method="post" action="../php/admin_reserva_estado.php">
+                                                <?php echo csrf_field(); ?>
+                                                <input type="hidden" name="id" value="<?php echo (int) $r['id']; ?>">
+                                                <input type="hidden" name="estado" value="cancelada">
+                                                <button class="btn btn-sm btn-outline-danger" type="submit" <?php echo $r['estado'] === 'cancelada' ? 'disabled' : ''; ?>>Cancelar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
     <script src="../scripts/bootstrap.bundle.min.js"></script>
     <script>
+        // Persist active admin tab across visits
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('#adminTabs button[data-bs-toggle="tab"]');
+            const stored = localStorage.getItem('adminTab');
+            if (stored) {
+                const targetBtn = Array.from(tabs).find(btn => btn.getAttribute('data-bs-target') === stored);
+                if (targetBtn) {
+                    const tab = new bootstrap.Tab(targetBtn);
+                    tab.show();
+                }
+            }
+            tabs.forEach(btn => {
+                btn.addEventListener('shown.bs.tab', function (e) {
+                    const target = e.target.getAttribute('data-bs-target');
+                    localStorage.setItem('adminTab', target);
+                });
+            });
+        });
         fetch('../api/galeria_ultimas.php')
             .then(r => r.json())
             .then(items => {

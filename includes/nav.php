@@ -24,7 +24,7 @@ $rol = $_SESSION['usuario_rol'] ?? 'cliente';
                 <li class="nav-item"><a class="nav-link" href="galeria.php">Galería</a></li>
                 <li class="nav-item"><a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a></li>
                 <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="reservas.php">Reservar</a></li>
             </ul>
             <div class="d-flex gap-2 ms-auto" id="auth-buttons">
                 <?php if ($loggedIn): ?>

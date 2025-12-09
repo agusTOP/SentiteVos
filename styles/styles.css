@@ -99,6 +99,40 @@ nav a:hover {
   /* rosa oscuro */
 }
 
+/* Perfil tabs styling to match brand */
+.nav-tabs .nav-link {
+  color: #3a7ca5;
+  font-weight: 600;
+  border: none;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #b94a5a;
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background: #e5738a;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(233, 115, 138, 0.15);
+}
+
+.tab-content {
+  padding-top: 0.75rem;
+}
+
+/* Admin section headings */
+.admin-section-title {
+  color: #3a7ca5;
+  font-weight: 700;
+}
+
+.admin-section-subtitle {
+  color: #e5738a;
+  font-weight: 600;
+}
+
 .banner {
   text-align: center;
   padding: 3rem 1rem 2rem 1rem;
