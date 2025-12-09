@@ -1,43 +1,64 @@
--- Crear base de datos
-CREATE DATABASE IF NOT EXISTS sentitevos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE sentitevos;
+CREATE TABLE `galeria` (
+  `id` int UNSIGNED NOT NULL,
+  `titulo` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci,
+  `ruta_imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_subida` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabla de usuarios
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    telefono VARCHAR(20),
-    -- Verificación de email
-    email_verified TINYINT(1) NOT NULL DEFAULT 0,
-    email_verify_token VARCHAR(64) DEFAULT NULL,
-    email_verified_at DATETIME DEFAULT NULL,
-    last_verification_sent_at DATETIME DEFAULT NULL,
-    -- Recuperación de contraseña
-    password_reset_token VARCHAR(64) DEFAULT NULL,
-    password_reset_expires DATETIME DEFAULT NULL,
-    -- Rol del usuario
-    rol ENUM('admin','cliente') DEFAULT 'cliente',
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 
--- Tabla de reservas
-CREATE TABLE IF NOT EXISTS reservas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    servicio VARCHAR(100) NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
-    estado ENUM('pendiente', 'confirmada', 'cancelada') DEFAULT 'pendiente',
-    notas TEXT,
-    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
 
--- Usuario de prueba (password: "123456")
--- Puedes borrarlo después de crear tu primer usuario real
-INSERT INTO usuarios (nombre, email, password) VALUES 
-('Usuario Prueba', 'test@test.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+CREATE TABLE `usuarios` (
+  `id` int UNSIGNED NOT NULL,
+  `nombre` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified` tinyint(1) NOT NULL DEFAULT '0',
+  `email_verify_token` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` datetime DEFAULT NULL,
+  `last_verification_sent_at` datetime DEFAULT NULL,
+  `rol` enum('cliente','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cliente',
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `password_reset_token` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password_reset_expires` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `galeria`
+--
+ALTER TABLE `galeria`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_fecha_subida` (`fecha_subida`),
+  ADD KEY `idx_titulo` (`titulo`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `galeria`
+--
+ALTER TABLE `galeria`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
