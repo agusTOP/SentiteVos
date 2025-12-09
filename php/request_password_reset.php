@@ -2,6 +2,9 @@
 session_start();
 require_once dirname(__DIR__) . '/config/database.php';
 require_once dirname(__DIR__) . '/config/helpers.php';
+require_once dirname(__DIR__) . '/config/env.php';
+// Cargar .env para MAIL_*
+loadEnv(dirname(__DIR__));
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -46,20 +49,36 @@ try {
     $upd->execute();
     $upd->close();
 
-    // Enviar email
-    $resetLink = sprintf('%s/reset_password.php?token=%s', rtrim(dirname(dirname($_SERVER['REQUEST_URI'])), '/'), $token);
+    // Construir URL absoluta usando APP_URL
+    $appUrl = env('APP_URL', null);
+    $resetPath = '/reset_password.php?token=' . urlencode($token);
+    $resetLink = $appUrl ? rtrim($appUrl, '/') . $resetPath : ('http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $resetPath);
 
     $mail = new PHPMailer(true);
     try {
+        // Debug opcional
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        $mail->Host = env('SMTP_HOST', 'smtp.example.com');
+        // Usar el mismo esquema que register.php (MAIL_*)
+        $mail->Host = env('MAIL_HOST', 'smtp.example.com');
         $mail->SMTPAuth = true;
-        $mail->Username = env('SMTP_USER', 'user@example.com');
-        $mail->Password = env('SMTP_PASS', 'secret');
-        $mail->SMTPSecure = env('SMTP_SECURE', 'tls');
-        $mail->Port = (int) env('SMTP_PORT', 587);
+        $mail->Username = env('MAIL_USERNAME', 'defaultmail@gmail.com');
+        $mail->Password = env('MAIL_PASSWORD', 'pass');
+        // Por defecto SMTPS (465) como en register.php
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = (int) env('MAIL_PORT', 465);
+        // Opciones para entorno dev
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ]
+        ];
 
-        $mail->setFrom(env('MAIL_FROM', 'no-reply@sentitevos.com'), 'Sentite Vos');
+        $fromEmail = env('MAIL_FROM', $mail->Username);
+        $fromName = env('MAIL_FROM_NAME', 'Sentite Vos');
+        $mail->setFrom($fromEmail, $fromName);
         $mail->addAddress($user['email'], $user['nombre']);
         $mail->Subject = 'Recuperación de contraseña';
         $mail->isHTML(true);
@@ -67,6 +86,7 @@ try {
             '<p>Recibimos una solicitud para restablecer tu contraseña. Haz clic en el siguiente enlace:</p>' .
             '<p><a href="' . e($resetLink) . '">Restablecer contraseña</a></p>' .
             '<p>Si no solicitaste este cambio, ignora este correo.</p>';
+        $mail->AltBody = 'Hola ' . $user['nombre'] . ' - Restablecer contraseña: ' . $resetLink;
 
         $mail->send();
     } catch (Exception $e) {
