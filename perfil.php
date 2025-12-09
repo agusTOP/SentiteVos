@@ -46,6 +46,26 @@ $email = $_SESSION['usuario_email'] ?? '';
                         <a href="index.html" class="btn btn-login">Inicio</a>
                         <a href="php/logout.php" class="btn btn-register">Cerrar sesión</a>
                     </div>
+                    <hr class="my-4">
+                    <h3 class="mb-3" style="color:#e5738a;">Cambiar contraseña</h3>
+                    <form method="POST" action="php/change_password.php" class="mt-2">
+                        <?php echo csrf_field(); ?>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Contraseña actual</label>
+                            <input type="password" class="form-control" id="currentPassword" name="current_password"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar nueva contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-login">Actualizar contraseña</button>
+                    </form>
                 </div>
             </div>
         </div>
