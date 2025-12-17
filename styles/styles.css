@@ -58,7 +58,7 @@ nav {
   transition: box-shadow 0.3s;
 }
 
-.nav-link.active {
+.nav-tabs .nav-link.active {
   color: #fff;
   background: #e5738a;
   /* rosa principal */
@@ -67,6 +67,12 @@ nav {
   box-shadow: 0 2px 8px rgba(233, 115, 138, 0.15);
   transition: background 0.2s, color 0.2s;
 }
+.navbar-nav .nav-link.active {
+  color: #e5738a !important;
+  transition: background 0.2s, color 0.2s;
+  font-weight: bold;
+}
+
 
 .logo {
   font-size: 2rem;

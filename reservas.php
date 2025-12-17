@@ -73,6 +73,7 @@ ensureCsrfToken();
         </div>
     </main>
     <?php include __DIR__ . '/includes/footer.html'; ?>
+    <script src="scripts/include.js"></script>
     <script>
         const horaSel = document.getElementById('hora');
         const fechaInput = document.getElementById('fecha');
