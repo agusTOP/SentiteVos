@@ -32,11 +32,7 @@ $items = require __DIR__ . '/php/obtener_galeria.php';
     <main>
         <section class="instagram" id="galeria">
             <h2>
-                <svg width="24" height="24" fill="none" stroke="#3a7ca5" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="3.5" fill="#e5738a" />
-                    <circle cx="17.5" cy="6.5" r="1.5" />
+                <img src="assets/images/insta_logo.png" alt="Instagram" style="width: 24px; height: auto;">
                 </svg> Últimos trabajos
             </h2>
             <div class="container py-4">
@@ -55,8 +51,8 @@ $items = require __DIR__ . '/php/obtener_galeria.php';
                 <?php endif; ?>
             </div>
 
-            <a href="https://instagram.com" target="_blank" class="btn-instagram">Ver más en Instagram</a>
-            <a href="https://wa.me/543511234567" class="whatsapp-float" target="_blank" title="WhatsApp">
+            <a href="https://www.instagram.com/sentitevos_ld?igsh=aG5wN2F3aWpiaG9s" target="_blank" class="btn-instagram">Ver más en Instagram</a>
+            <a href="https://wa.me/3534207231" class="whatsapp-float" target="_blank" title="WhatsApp">
                 <img src="assets/images/ws.png" alt="WhatsApp" style="width: 40px; height: auto;">
             </a>
 
