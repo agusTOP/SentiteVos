@@ -78,7 +78,9 @@ ensureCsrfToken();
         const horaSel = document.getElementById('hora');
         const fechaInput = document.getElementById('fecha');
         const today = new Date().toISOString().split('T')[0];
-        fechaInput.min = today;
+        if(fechaInput){
+            fechaInput.min = today;
+        }
 
         function generarSlots() {
             const slots = [];
