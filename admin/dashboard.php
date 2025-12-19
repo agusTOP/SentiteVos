@@ -21,17 +21,31 @@ $error = flash_get('error');
     <link rel="icon" href="../assets/icon.ico">
 </head>
 
-<body class="bg-light" style="padding-top: 0;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <span class="navbar-brand">Panel de Administración</span>
-            <div class="d-flex">
-                <a class="btn btn-outline-light me-2" href="../index.html">Ir al sitio</a>
-                <a class="btn btn-outline-light" href="../php/logout.php">Salir</a>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo d-flex align-items-center" href="../index.html" style="font-weight:bold;padding:0;margin:0;">
+                <img src="../assets/images/logo_sin_fondo.png" alt="Sentite Vos" style="width: 100px; height: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar"
+                aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <span class="nav-link active" aria-current="page" style="font-weight:700;color:#e5738a;">Panel de Administración</span>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2 ms-auto">
+                    <a class="btn btn-login" href="../index.html">Ir al sitio</a>
+                    <a class="btn btn-register" href="../php/logout.php">Salir</a>
+                </div>
             </div>
         </div>
     </nav>
 
+    <main>
     <div class="container py-4">
         <h1 class="mb-4">Panel de Administración</h1>
 
@@ -204,6 +218,35 @@ $error = flash_get('error');
             </div>
         </div>
     </div>
+    </main>
+
+    <footer class="footer-minimal py-4 bg-white border-top mt-auto">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="footer-logo" style="font-size:1.5rem;font-weight:bold;color:#e5738a;">
+                <img src="../assets/images/logo.png" alt="Sentite Vos" style="width: 100px; height: auto;">
+            </div>
+            <ul class="footer-links list-unstyled d-flex gap-3 mb-0">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../servicios.html">Servicios</a></li>
+                <li><a href="../galeria.php">Galería</a></li>
+                <li><a href="../sobre-nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="../contacto.html">Contacto</a></li>
+            </ul>
+            <div class="footer-redes d-flex gap-2">
+                <a href="https://wa.me/3534207231" target="_blank" title="WhatsApp">
+                    <img src="../assets/images/ws.png" alt="WhatsApp" style="width: 24px; height: auto;">
+                </a>
+                <a href="https://www.instagram.com/sentitevos_ld?igsh=aG5wN2F3aWpiaG9s" target="_blank" title="Instagram">
+                    <img src="../assets/images/insta_logo.png" alt="Instagram" style="width: 24px; height: auto;">
+                </a>
+                <a href="https://www.facebook.com/TerminalBallestero/" target="_blank" title="Facebook">
+                    <img src="../assets/images/face_logo.png" alt="Facebook" style="width: 24px; height: auto;">
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-3" style="font-size:0.95rem;color:#888;">&copy; 2025 Sentite Vos. Todos los derechos
+            reservados.</div>
+    </footer>
 
     <script src="../scripts/bootstrap.bundle.min.js"></script>
     <script>
