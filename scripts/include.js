@@ -58,6 +58,34 @@ function setActiveNav() {
   });
 }
 
+function setActiveFooter() {
+  const links = document.querySelectorAll('.footer-links a');
+  if (!links.length) return;
+
+  const normalize = (path) => {
+    try {
+      return path.replace(/\/index\.html$/, '/');
+    } catch (_) {
+      return path;
+    }
+  };
+
+  const current = normalize(window.location.pathname);
+
+  links.forEach(link => {
+    link.classList.remove('active');
+    try {
+      const href = link.getAttribute('href');
+      const linkPath = normalize(new URL(href, window.location.href).pathname);
+      if (linkPath === current) {
+        link.classList.add('active');
+      }
+    } catch (_) {
+      // Ignorar URLs mal formadas
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   // En páginas HTML puras, incluir parciales vía JS
   if (document.getElementById('nav-include')) {
@@ -72,6 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (document.getElementById('footer-include')) {
-    includeHTML('footer-include', 'includes/footer.html');
+    includeHTML('footer-include', 'includes/footer.html', function () {
+      setActiveFooter();
+    });
   }
+
+  // Si el footer ya existe en el DOM (páginas PHP/admin), marcar activo
+  setActiveFooter();
 });

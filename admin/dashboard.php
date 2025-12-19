@@ -229,6 +229,7 @@ $error = flash_get('error');
                 <li><a href="../index.html">Inicio</a></li>
                 <li><a href="../servicios.html">Servicios</a></li>
                 <li><a href="../galeria.php">Galería</a></li>
+                <li><a href="../reservas.php">Reservas</a></li>
                 <li><a href="../sobre-nosotros.html">Sobre Nosotros</a></li>
                 <li><a href="../contacto.html">Contacto</a></li>
             </ul>
@@ -249,6 +250,7 @@ $error = flash_get('error');
     </footer>
 
     <script src="../scripts/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/include.js"></script>
     <script>
         // Persist active admin tab across visits
         document.addEventListener('DOMContentLoaded', function () {

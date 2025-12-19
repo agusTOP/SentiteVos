@@ -105,6 +105,23 @@ nav a:hover {
   /* rosa oscuro */
 }
 
+/* Footer links: brand color + active state */
+.footer-links a {
+  color: #3a7ca5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-links a:hover {
+  color: #b94a5a;
+}
+.footer-links a.active {
+  color: #e5738a;
+  font-weight: 700;
+  border-bottom: 2px solid #e5738a;
+  padding-bottom: 2px;
+}
+
 /* Galería: hacer tiles uniformes y evitar saltos */
 #galeria .galeria-img {
   width: 100%;
