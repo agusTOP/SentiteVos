@@ -17,11 +17,13 @@
   <main>
     <section class="contacto" id="contacto">
       <h2>Contacto</h2>
-      <form class="form-contacto" autocomplete="off">
-        <input type="text" placeholder="Nombre" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Mensaje" required rows="4"></textarea>
+      <form class="form-contacto" id="form-contacto" autocomplete="off" novalidate>
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="mensaje" placeholder="Mensaje" required rows="4"></textarea>
+        <input type="text" name="hp" style="display:none" tabindex="-1" autocomplete="off">
         <button type="submit">Enviar</button>
+        <div class="contacto-status" aria-live="polite" style="margin-top:0.5rem;"></div>
       </form>
       <div class="mapa-contacto" style="margin-bottom:2rem;">
         <iframe
@@ -31,7 +33,7 @@
       </div>
       <div class="contacto-datos text-center">
         <p><b>Teléfono:</b> 353-4207231</p>
-        <p><b>Email:</b> sentitevos2018@gmail.com</p>
+        <p><b>Email:</b> lorena@sentitevos.site </p>
         <p><b>Dirección:</b> Ballesteros, Córdoba</p>
       </div>
     </section>

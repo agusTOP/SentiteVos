@@ -65,7 +65,7 @@ try {
                     <tbody>
                         <?php foreach ($reservas as $r): ?>
                             <tr>
-                                <td><?php echo e($r['fecha']); ?></td>
+                                <td><?php echo e(date('d/m/Y', strtotime($r['fecha']))); ?></td>
                                 <td><?php echo substr($r['hora'], 0, 5); ?></td>
                                 <td><?php echo e($r['servicio']); ?></td>
                                 <td><span

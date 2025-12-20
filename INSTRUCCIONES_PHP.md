@@ -43,6 +43,35 @@
 2. Usa el usuario de prueba o uno que hayas creado
 3. Si es correcto, te redirige a index.html
 
+
+## ✉️ Configurar Envío de Correos (.env)
+
+Para que el sistema envíe mails (verificación, recuperación de contraseña, confirmación de reservas):
+
+- Crea un archivo `.env` en la raíz del proyecto (c:\xampp\htdocs\sentitevos\.env) con:
+
+```
+APP_URL=http://localhost/sentitevos
+
+MAIL_HOST=smtp.tu-proveedor.com
+MAIL_PORT=465
+MAIL_USERNAME=tu-email@dominio.com
+MAIL_PASSWORD=tu-password
+MAIL_FROM=tu-email@dominio.com
+MAIL_FROM_NAME=Sentite Vos
+
+# Email para notificar nuevas solicitudes de turno (dueña)
+OWNER_EMAIL=lorena@sentitevos.site 
+```
+
+- Los correos se envían usando PHPMailer en modo SMTP seguro (465).
+- Si usas Gmail, habilita “App Passwords” o usa un proveedor SMTP confiable.
+- `APP_URL` se usa para construir enlaces en los mails.
+
+Mailer centralizado:
+- El envío de correos está centralizado en [config/mailer.php](config/mailer.php) para evitar repetir código.
+- Usa `send_mail_simple(...)` para enviar al usuario y `notify_owner(...)` para avisar a la dueña (incluye correo secundario si está configurado).
+
 ---
 
 ## 📋 Paso 4: Actualizar Links en tu Navbar
